@@ -1,0 +1,25 @@
+# Usaremos o compose para uma funcionalidade chamada "VOLUME"
+# Ela espelha uma pasta para dentro do container
+# Desse modo, sempre que alterar alguma coisa no arquivo, esta alteração é refletida no container
+
+# Definindo a versão do compose
+version: '3'
+
+# Definindo os serviços da aplicação
+# Por enquanto, o único serviço será a nossa aplicação
+services:
+  app:
+
+    # Aonde está localizado o dockerfile da aplicação
+    build: . # O ponto significa que o dockerfile está na mesma pasta do compose
+
+    # Definindo o comando que deve executar quando a aplicação subir
+    command: npm start
+
+    # Redirecionamento de portas
+    ports:
+      - "3000:3000"
+
+    # Qual pasta eu desejo refletir as alterações e PARA ONDE
+    volumes:
+      - .:/usr/app # Todos os arquivos da raiz devem ser refletidos para "/usr/app"
